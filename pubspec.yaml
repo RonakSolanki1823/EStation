@@ -1,0 +1,38 @@
+name: testing
+description: "A new Flutter project."
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ✅ Core dependencies
+  supabase_flutter: ^2.5.0
+  google_maps_flutter: ^2.13.1
+  google_maps_flutter_web: ^0.5.4+2   # ✅ added in dependencies (not dev_dependencies)
+  geolocator: ^12.0.0
+  mobile_scanner: ^5.1.0
+  intl: ^0.18.1
+  provider: ^6.1.2
+  circle_nav_bar: ^2.2.0
+  google_fonts: ^6.2.1
+  cupertino_icons: ^1.0.2
+  curved_navigation_bar: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/map_style.txt
+    - assets/ # This includes all files in the assets directory
+    - lib/src/features/user/profile/asset/
