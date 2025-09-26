@@ -23,9 +23,13 @@ Future<void> main() async {
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 
-  // DEBUG: Print Supabase config values
-  print('DEBUG main.dart: Supabase URL from config: ${SupabaseConfig.supabaseUrl}');
-  print('DEBUG main.dart: Supabase Anon Key (first 10 chars): ${SupabaseConfig.supabaseAnonKey.substring(0, 10)}');
+  // DEBUG: Print Supabase config values safely
+  final String debugUrl = SupabaseConfig.supabaseUrl.isEmpty ? '<empty>' : SupabaseConfig.supabaseUrl;
+  final String debugAnonPrefix = SupabaseConfig.supabaseAnonKey.length >= 10
+      ? SupabaseConfig.supabaseAnonKey.substring(0, 10)
+      : (SupabaseConfig.supabaseAnonKey.isEmpty ? '<empty>' : SupabaseConfig.supabaseAnonKey);
+  print('DEBUG main.dart: Supabase URL from config: $debugUrl');
+  print('DEBUG main.dart: Supabase Anon Key (first 10 chars): $debugAnonPrefix');
 
   // Initialize Supabase
   try {
