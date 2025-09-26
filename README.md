@@ -1,16 +1,61 @@
 # testing
 
-A new Flutter project.
+This Flutter app uses Supabase and Google Maps.
 
-## Getting Started
+## Configure a Supabase account
 
-This project is a starting point for a Flutter application.
+Provide your Supabase project URL and anon key at runtime using `--dart-define`.
 
-A few resources to get you started if this is your first Flutter project:
+Create `lib/config/api_keys.dart` (already present) which reads:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```dart
+class ApiKeys {
+  static const String supabaseUrl =
+      String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  static const String supabaseAnonKey =
+      String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+}
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Run commands
+
+Replace placeholders with your Supabase values.
+
+### Web
+```bash
+flutter clean && flutter pub get
+flutter run -d chrome \
+  --web-renderer=canvaskit \
+  --dart-define=SUPABASE_URL=https://YOUR-PROJECT.supabase.co \
+  --dart-define=SUPABASE_ANON_KEY=YOUR_ANON_KEY
+```
+
+### Android
+Create `android/app/google_api.properties` with:
+
+```properties
+GOOGLE_API_KEY=YOUR_ANDROID_GOOGLE_MAPS_KEY
+```
+
+Run:
+
+```bash
+flutter clean && flutter pub get
+flutter run -d android \
+  --dart-define=SUPABASE_URL=https://YOUR-PROJECT.supabase.co \
+  --dart-define=SUPABASE_ANON_KEY=YOUR_ANON_KEY
+```
+
+### iOS
+Add location usage descriptions to `ios/Runner/Info.plist` if needed, then run from Xcode or:
+
+```bash
+flutter clean && flutter pub get
+flutter run -d ios \
+  --dart-define=SUPABASE_URL=https://YOUR-PROJECT.supabase.co \
+  --dart-define=SUPABASE_ANON_KEY=YOUR_ANON_KEY
+```
+
+## Notes
+- Android and Web use different Google Maps keys. Web key is referenced in `web/index.html`.
+- Keys are ignored by git via `.gitignore`.
